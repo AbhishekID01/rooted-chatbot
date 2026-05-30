@@ -4,7 +4,11 @@ from pydantic import BaseModel
 from services.search_service import search_knowledge
 from services.llm_service import generate_response
 
+from app.webhook import router as webhook_router
+
 app = FastAPI()
+
+app.include_router(webhook_router)
 
 
 class ChatRequest(BaseModel):
