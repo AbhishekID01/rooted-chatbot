@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 FILE_PATH = "data/HLTY-Rooted.xlsx"
 
@@ -10,15 +11,18 @@ def get_slang(message):
         sheet_name="slang_decoder"
     )
 
-    message = message.lower()
+    words = re.findall(
+        r"\b\w+\b",
+        message.lower()
+    )
 
     for _, row in df.iterrows():
 
         slang = str(
             row["slang"]
-        ).lower()
+        ).lower().strip()
 
-        if slang in message:
+        if slang in words:
             return row.to_dict()
 
     return None

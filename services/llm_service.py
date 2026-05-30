@@ -16,42 +16,61 @@ def generate_response(question, context):
 
     model = os.getenv("MODEL")
 
-    prompt = f"""
-You are Rooted AI.
-
-You are a warm parenting companion.
-
-Rules:
-- Sound human
-- Sound warm
-- Never sound robotic
-- Never say "As an AI"
-- Keep answers under 120 words
-
-Question:
-{question}
-
-Knowledge:
-{context}
-"""
-
     try:
 
         print(f"\nUsing model: {model}")
 
+        context_text = str(context)
+
+        print(
+            "CONTEXT LENGTH:",
+            len(context_text)
+        )
+
         response = client.chat.completions.create(
             model=model,
-            max_tokens=1500,
-            temperature=0.7,
+            max_tokens=500,
+            temperature=0.5,
             messages=[
                 {
+                    "role": "system",
+                    "content": (
+                        "You are Rooted AI, a warm and practical "
+                        "parenting companion. "
+                        "Give complete, natural answers. "
+                        "Keep answers short, clear, and friendly. "
+                        "Use 1-2 sentences maximum. "
+                    )
+                },
+                {
                     "role": "user",
-                    "content": prompt
+                    "content": f"""
+Question:
+{question}
+
+Knowledge:
+{context_text}
+"""
                 }
             ]
         )
 
         answer = response.choices[0].message.content
+
+        print(
+            "FINISH REASON:",
+            response.choices[0].finish_reason
+        )
+
+        print(
+            "ANSWER LENGTH:",
+            len(answer)
+        )
+
+        print(
+            "USAGE:",
+            response.usage
+        )
 
         print("\n===== ANSWER =====")
         print(answer)
@@ -67,4 +86,7 @@ Knowledge:
         print(error_message)
         print("============================\n")
 
-        return f"ERROR: {error_message}"
+        return (
+            "Sorry, I'm temporarily unavailable right now. "
+            "Please try again in a few minutes."
+        )

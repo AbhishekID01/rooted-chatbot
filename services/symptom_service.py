@@ -3,25 +3,27 @@ import pandas as pd
 FILE_PATH = "data/HLTY-Rooted.xlsx"
 
 
-def get_symptom(keyword):
+def get_symptom(message):
 
     df = pd.read_excel(
         FILE_PATH,
         sheet_name="symptom_lookup"
     )
 
-    result = df[
-        df.astype(str)
-        .apply(
-            lambda row: row.str.lower().str.contains(
-                keyword.lower(),
-                na=False
-            ).any(),
-            axis=1
+    message = (
+        message.lower()
+        .replace(" ", "")
+    )
+
+    for _, row in df.iterrows():
+
+        symptom = (
+            str(row["symptom"])
+            .lower()
+            .replace(" ", "")
         )
-    ]
 
-    if result.empty:
-        return None
+        if symptom in message:
+            return row.to_dict()
 
-    return result.iloc[0].to_dict()
+    return None

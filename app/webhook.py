@@ -58,12 +58,19 @@ async def receive(request: Request):
 
         print("REPLY:", reply)
 
-        send_whatsapp_message(
+        result = send_whatsapp_message(
             sender,
             reply
         )
 
+        print("\n===== WHATSAPP RESULT =====")
+        print(result)
+        print("===========================\n")
+
     except Exception as e:
-        print("ERROR:", str(e))
+
+        print("\n===== ERROR =====")
+        print(str(e))
+        print("=================\n")
 
     return {"status": "ok"}
