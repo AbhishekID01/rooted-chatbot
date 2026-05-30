@@ -3,25 +3,20 @@ import pandas as pd
 FILE_PATH = "data/HLTY-Rooted.xlsx"
 
 
-def get_creator(keyword):
+def get_creator(message):
 
     df = pd.read_excel(
         FILE_PATH,
         sheet_name="creator_briefs"
     )
 
-    result = df[
-        df.astype(str)
-        .apply(
-            lambda row: row.str.lower().str.contains(
-                keyword.lower(),
-                na=False
-            ).any(),
-            axis=1
-        )
-    ]
+    message = message.lower()
 
-    if result.empty:
-        return None
+    for _, row in df.iterrows():
 
-    return result.iloc[0].to_dict()
+        creator_name = str(row["name"]).lower()
+
+        if creator_name in message:
+            return row.to_dict()
+
+    return None

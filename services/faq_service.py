@@ -3,21 +3,29 @@ import pandas as pd
 FILE_PATH = "data/HLTY-Rooted.xlsx"
 
 
-def get_faq(user_question):
+def get_faq(message):
 
     df = pd.read_excel(
         FILE_PATH,
         sheet_name="FAQ"
     )
 
-    result = df[
-        df["question"]
-        .astype(str)
-        .str.lower()
-        .str.contains(user_question.lower(), na=False)
-    ]
+    message = message.lower()
 
-    if result.empty:
-        return None
+    for _, row in df.iterrows():
 
-    return result.iloc[0].to_dict()
+        question = str(
+            row["question"]
+        ).lower()
+
+        words = question.split()
+
+        matches = sum(
+            1 for word in words
+            if word in message
+        )
+
+        if matches >= 3:
+            return row.to_dict()
+
+    return None

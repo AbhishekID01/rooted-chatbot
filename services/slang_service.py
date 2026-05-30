@@ -3,14 +3,22 @@ import pandas as pd
 FILE_PATH = "data/HLTY-Rooted.xlsx"
 
 
-def get_slang(slang_word):
-    df = pd.read_excel(FILE_PATH, sheet_name="slang_decoder")
+def get_slang(message):
 
-    result = df[
-        df["slang"].astype(str).str.lower() == slang_word.lower()
-    ]
+    df = pd.read_excel(
+        FILE_PATH,
+        sheet_name="slang_decoder"
+    )
 
-    if result.empty:
-        return None
+    message = message.lower()
 
-    return result.iloc[0].to_dict()
+    for _, row in df.iterrows():
+
+        slang = str(
+            row["slang"]
+        ).lower()
+
+        if slang in message:
+            return row.to_dict()
+
+    return None

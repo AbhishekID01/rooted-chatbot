@@ -2,16 +2,36 @@ def detect_intent(message):
 
     msg = message.lower()
 
-    if any(word in msg for word in ["sigma", "rizz", "skibidi", "gyatt"]):
+    # Slang / Meme
+    if any(word in msg for word in [
+        "sigma", "rizz", "skibidi", "gyatt"
+    ]):
         return "slang"
 
-    if any(word in msg for word in ["anxiety", "depression", "stress"]):
+    # Symptoms
+    if any(word in msg for word in [
+        "anxiety", "depression", "stress",
+        "hides phone", "hide phone"
+    ]):
         return "symptom"
 
-    if any(word in msg for word in ["sextortion", "grooming", "porn"]):
+    # Digital Dangers
+    if any(word in msg for word in [
+        "sextortion", "grooming", "porn"
+    ]):
         return "danger"
 
-    if any(word in msg for word in ["movie", "show", "netflix"]):
+    # Media
+    if any(word in msg for word in [
+        "movie", "show", "netflix",
+        "tiktok", "youtube", "discord", "roblox"
+    ]):
         return "media"
+
+    # Creator
+    if any(word in msg for word in [
+        "mrbeast"
+    ]):
+        return "creator"
 
     return "faq"
