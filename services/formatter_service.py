@@ -47,6 +47,9 @@ Danger Type:
 
 💡 Prevention:
 {row['prevention_tips']}
+
+🛡️ Parent Action:
+{row['parent_actions']}
 """.strip()
 
 
@@ -55,8 +58,11 @@ def format_media(row):
     return f"""
 📱 {row['name']}
 
-Recommended Age:
-{row['it_recommended_age']}
+Official Age:
+{row['official_age']}
+
+👨‍👩‍👧 Parent Recommended Age:
+{row['parent_recommended_age']}
 
 ⚠️ Risk Level:
 {row['risk_level'].title()}
@@ -64,8 +70,11 @@ Recommended Age:
 🚨 Main Concerns:
 {row['main_concerns']}
 
-💡 Parent Advice:
-{row['parents_should']}
+💡 What Parents Should Know:
+{row['what_parents_should_know']}
+
+🔒 Safety Tip:
+{row['safety_tips']}
 """.strip()
 
 
@@ -77,7 +86,7 @@ def format_symptom(row):
 ⚠️ Urgency:
 {row['urgency_level'].title()}
 
-Possible Causes:
+🤔 Possible Causes:
 {row['possible_causes']}
 
 👀 Warning Signs:
@@ -99,6 +108,9 @@ Platform:
 ⚠️ Risk Level:
 {row['risk_level'].title()}
 
+📊 Trend Status:
+{row['trend_status']}
+
 📝 What It Is:
 {row['what_is_it']}
 
@@ -112,10 +124,10 @@ def format_tough_topic(row):
     return f"""
 ❤️ {row['title']}
 
-Parent Emotion:
+👨 Parent Emotion:
 {row['parent_emotion']}
 
-Child Emotion:
+🧒 Child Emotion:
 {row['child_emotion']}
 
 💡 What To Do:
