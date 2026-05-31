@@ -59,21 +59,21 @@ def send_welcome_menu(to):
                         "type": "reply",
                         "reply": {
                             "id": "apps",
-                            "title": "Apps"
+                            "title": "📱 Apps"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
                             "id": "creators",
-                            "title": "Creators"
+                            "title": "👤 Creators"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
                             "id": "slang",
-                            "title": "Slang"
+                            "title": "💬 Slang"
                         }
                     }
                 ]

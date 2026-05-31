@@ -51,8 +51,19 @@ async def receive(request: Request):
             print("Status webhook received")
             return {"status": "ok"}
 
-        message = value["messages"][0]["text"]["body"]
-        sender = value["messages"][0]["from"]
+        msg = value["messages"][0]
+
+        if msg["type"] == "text":
+            message = msg["text"]["body"]
+
+        elif msg["type"] == "button":
+            message = msg["button"]["payload"]
+
+        else:
+            print("Unsupported message type:", msg["type"])
+            return {"status": "ok"}
+
+        sender = msg["from"]
 
         print("MESSAGE:", message)
         print("SENDER:", sender)
