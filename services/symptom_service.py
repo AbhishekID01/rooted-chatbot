@@ -24,6 +24,10 @@ def get_symptom(message):
         )
 
         if symptom in message:
-            return row.to_dict()
+
+            return {
+                "score": 100,
+                "data": row.to_dict()
+            }
 
     return None

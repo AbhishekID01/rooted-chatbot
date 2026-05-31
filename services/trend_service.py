@@ -3,7 +3,7 @@ import pandas as pd
 FILE_PATH = "data/HLTY-Rooted.xlsx"
 
 
-def get_trend(keyword):
+def get_trend(message):
 
     df = pd.read_excel(
         FILE_PATH,
@@ -14,7 +14,7 @@ def get_trend(keyword):
         df.astype(str)
         .apply(
             lambda row: row.str.lower().str.contains(
-                keyword.lower(),
+                message.lower(),
                 na=False
             ).any(),
             axis=1
@@ -24,4 +24,7 @@ def get_trend(keyword):
     if result.empty:
         return None
 
-    return result.iloc[0].to_dict()
+    return {
+        "score": 100,
+        "data": result.iloc[0].to_dict()
+    }
