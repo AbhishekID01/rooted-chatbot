@@ -14,7 +14,7 @@ PHONE_NUMBER_ID = os.getenv(
 
 def send_whatsapp_message(to, message):
 
-```
+
 url = (
     f"https://graph.facebook.com/v25.0/"
     f"{PHONE_NUMBER_ID}/messages"
@@ -41,11 +41,11 @@ response = requests.post(
 )
 
 return response.json()
-```
+
 
 def send_welcome_menu(to):
 
-```
+
 url = (
     f"https://graph.facebook.com/v25.0/"
     f"{PHONE_NUMBER_ID}/messages"
@@ -100,4 +100,4 @@ response = requests.post(
 )
 
 return response.json()
-```
+
