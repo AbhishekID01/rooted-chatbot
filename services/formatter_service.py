@@ -20,7 +20,7 @@ def format_slang(row):
 
 {row['meaning']}
 
-📍 Used for:
+📍 Used For:
 {row['used_for']}
 
 ⚠️ Risk Level:
@@ -28,4 +28,110 @@ def format_slang(row):
 
 💡 Parent Tip:
 {row['parent_tip']}
+""".strip()
+
+
+def format_danger(row):
+
+    return f"""
+🚨 {row['title']}
+
+Danger Type:
+{row['danger_type']}
+
+⚠️ Severity:
+{row['severity'].title()}
+
+👀 Signs To Watch:
+{row['signs_to_watch']}
+
+💡 Prevention:
+{row['prevention_tips']}
+""".strip()
+
+
+def format_media(row):
+
+    return f"""
+📱 {row['name']}
+
+Recommended Age:
+{row['it_recommended_age']}
+
+⚠️ Risk Level:
+{row['risk_level'].title()}
+
+🚨 Main Concerns:
+{row['main_concerns']}
+
+💡 Parent Advice:
+{row['parents_should']}
+""".strip()
+
+
+def format_symptom(row):
+
+    return f"""
+🩺 {row['symptom']}
+
+⚠️ Urgency:
+{row['urgency_level'].title()}
+
+Possible Causes:
+{row['possible_causes']}
+
+👀 Warning Signs:
+{row['warning_signs']}
+
+💡 What Parents Should Do:
+{row['what_parents_should_do']}
+""".strip()
+
+
+def format_trend(row):
+
+    return f"""
+📈 {row['title']}
+
+Platform:
+{row['platform']}
+
+⚠️ Risk Level:
+{row['risk_level'].title()}
+
+📝 What It Is:
+{row['what_is_it']}
+
+💡 Parent Advice:
+{row['parents_should']}
+""".strip()
+
+
+def format_tough_topic(row):
+
+    return f"""
+❤️ {row['title']}
+
+Parent Emotion:
+{row['parent_emotion']}
+
+Child Emotion:
+{row['child_emotion']}
+
+💡 What To Do:
+{row['what_to_do']}
+
+🎯 Goal:
+{row['emotional_goal']}
+""".strip()
+
+
+def format_faq(row):
+
+    return f"""
+❓ {row['question']}
+
+✅ Answer:
+
+{row['answer']}
 """.strip()
