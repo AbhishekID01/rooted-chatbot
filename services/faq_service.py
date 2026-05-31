@@ -47,6 +47,10 @@ def get_faq(message):
         )
 
         if matches >= 3:
-            return row.to_dict()
+
+            return {
+                "score": matches * 10,
+                "data": row.to_dict()
+            }
 
     return None
