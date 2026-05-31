@@ -42,7 +42,7 @@ def get_chatbot_response(message):
         if "symptom" in row:
             return format_symptom(row)
 
-        if "platform" in row and "trend_status" in row:
+        if "platform" in row:
             return format_trend(row)
 
         if "parent_emotion" in row:
@@ -55,6 +55,8 @@ def get_chatbot_response(message):
             question=message,
             context=row
         )
+
+    print("UNKNOWN QUESTION:", message)
 
     return generate_response(
         question=message,

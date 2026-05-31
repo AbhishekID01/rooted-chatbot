@@ -1,7 +1,7 @@
 def format_creator(row):
 
     return f"""
-🎬 {row['name']}
+👤 {row['name']}
 
 {row['name']} is a {row['creator_type']} known for {row['why_kids_like_it']}.
 
