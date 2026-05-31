@@ -24,6 +24,10 @@ def get_meme(message):
         )
 
         if meme_phrase in message:
-            return row.to_dict()
+
+            return {
+                "score": 100,
+                "data": row.to_dict()
+            }
 
     return None
