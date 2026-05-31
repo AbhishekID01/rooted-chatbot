@@ -19,6 +19,10 @@ def get_media(message):
         ).lower()
 
         if media_name in message:
-            return row.to_dict()
+
+            return {
+                "score": 100,
+                "data": row.to_dict()
+            }
 
     return None

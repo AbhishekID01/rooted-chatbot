@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 FILE_PATH = "data/HLTY-Rooted.xlsx"
 
@@ -12,17 +13,37 @@ def get_faq(message):
 
     message = message.lower()
 
+    message_words = set(
+        re.findall(r"\b\w+\b", message)
+    )
+
+    stop_words = {
+        "is", "are", "the", "a", "an",
+        "to", "of", "in", "on", "for",
+        "do", "does", "did", "my",
+        "how", "what", "why", "when",
+        "if", "i", "you", "your"
+    }
+
     for _, row in df.iterrows():
 
         question = str(
             row["question"]
         ).lower()
 
-        words = question.split()
+        question_words = set(
+            re.findall(r"\b\w+\b", question)
+        )
 
-        matches = sum(
-            1 for word in words
-            if word in message
+        question_words = {
+            word for word in question_words
+            if word not in stop_words
+        }
+
+        matches = len(
+            question_words.intersection(
+                message_words
+            )
         )
 
         if matches >= 3:

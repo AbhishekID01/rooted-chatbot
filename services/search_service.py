@@ -23,11 +23,20 @@ def search_knowledge(message):
         get_creator
     ]
 
+    best_match = None
+    best_score = 0
+
     for service in services:
 
         result = service(message)
 
-        if result:
-            return result
+        if not result:
+            continue
 
-    return None
+        score = result.get("score", 0)
+
+        if score > best_score:
+            best_score = score
+            best_match = result["data"]
+
+    return best_match
