@@ -11,13 +11,17 @@ def get_chatbot_response(message):
         return greeting
 
     row = search_knowledge(message)
+    print("SEARCH RESULT:", row)
 
-    if not row:
-        return (
-            "I don't have information about that yet. Try asking about internet slang, social media apps, creators, online safety, or parenting concerns."
+    # Found in Excel
+    if row:
+        return generate_response(
+            question=message,
+            context=row
         )
 
+    # AI fallback
     return generate_response(
         question=message,
-        context=row
+        context="No matching knowledge found."
     )

@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 from services.chatbot_service import get_chatbot_response
 from services.whatsapp_service import send_whatsapp_message
+from services.log_service import log_chat
 
 import os
 
@@ -43,7 +44,7 @@ async def receive(request: Request):
 
         value = data["entry"][0]["changes"][0]["value"]
 
-        # Ignore status updates
+        # Ignore status webhooks
         if "messages" not in value:
             print("Status webhook received")
             return {"status": "ok"}
@@ -57,6 +58,13 @@ async def receive(request: Request):
         reply = get_chatbot_response(message)
 
         print("REPLY:", reply)
+
+        # Save chat
+        log_chat(
+            sender,
+            message,
+            reply
+        )
 
         result = send_whatsapp_message(
             sender,
