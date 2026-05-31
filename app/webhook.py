@@ -66,6 +66,7 @@ async def receive(request: Request):
         sender = msg["from"]
 
         print("MESSAGE:", message)
+        print("RAW MESSAGE:", repr(message))
         print("SENDER:", sender)
 
         reply = get_chatbot_response(message)

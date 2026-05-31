@@ -21,7 +21,7 @@ def get_chatbot_response(message):
     if greeting:
         return greeting
 
-    if message == "apps":
+    if "apps" in message:
         return (
             "Apps & Platforms\n\n"
             "• Roblox\n"
@@ -31,7 +31,7 @@ def get_chatbot_response(message):
             "Type any app name to learn more."
         )
 
-    if message == "creators":
+    if "creators" in message:
         return (
             "Creators & Influencers\n\n"
             "• MrBeast\n"
@@ -40,7 +40,7 @@ def get_chatbot_response(message):
             "Type any creator name to learn more."
         )
 
-    if message == "slang":
+    if "slang" in message:
         return (
             "Slang Dictionary\n\n"
             "• Rizz\n"
