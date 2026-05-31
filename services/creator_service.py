@@ -11,27 +11,48 @@ def get_creator(message):
         sheet_name="creator_briefs"
     )
 
-    message = message.lower()
+    message = (
+        message.lower()
+        .replace(" ", "")
+    )
 
-    best_match = None
     best_score = 0
+    best_row = None
 
     for _, row in df.iterrows():
 
-        creator_name = str(
-            row["name"]
-        ).lower()
+        creator_name = (
+            str(row["name"])
+            .lower()
+            .replace(" ", "")
+        )
 
         score = fuzz.partial_ratio(
-            creator_name,
-            message
+            message,
+            creator_name
         )
 
         if score > best_score:
             best_score = score
-            best_match = row.to_dict()
+            best_row = row
+
+    if best_row is not None:
+
+        print(
+            "CREATOR BEST SCORE:",
+            best_score
+        )
+
+        print(
+            "CREATOR MATCH:",
+            best_row["name"]
+        )
 
     if best_score >= 80:
-        return best_match
+
+        return {
+            "score": best_score,
+            "data": best_row.to_dict()
+        }
 
     return None
